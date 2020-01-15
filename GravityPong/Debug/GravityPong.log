@@ -1,7 +1,16 @@
-﻿  CPlayer.cpp
+﻿  CBall.cpp
+  CPlayer.cpp
 D:\fegold\GravityPong\GravityPong\CPlayer.cpp(21,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\fegold\GravityPong\GravityPong\CPlayer.cpp(75,20): warning C4018: '<': signed/unsigned mismatch
-D:\fegold\GravityPong\GravityPong\CPlayer.cpp(84,20): warning C4018: '<': signed/unsigned mismatch
-D:\fegold\GravityPong\GravityPong\CPlayer.cpp(88,20): warning C4018: '<': signed/unsigned mismatch
-D:\fegold\GravityPong\GravityPong\CPlayer.cpp(93,9): warning C4018: '<': signed/unsigned mismatch
+D:\fegold\GravityPong\GravityPong\CPlayer.cpp(80,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\fegold\GravityPong\GravityPong\CPlayer.cpp(81,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\fegold\GravityPong\GravityPong\CPlayer.cpp(87,20): warning C4018: '<': signed/unsigned mismatch
+D:\fegold\GravityPong\GravityPong\CPlayer.cpp(91,20): warning C4018: '<': signed/unsigned mismatch
+D:\fegold\GravityPong\GravityPong\CPlayer.cpp(96,9): warning C4018: '<': signed/unsigned mismatch
+  CVector2.cpp
+D:\fegold\GravityPong\GravityPong\CVector2.cpp(19,3): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\fegold\GravityPong\GravityPong\CVector2.cpp(20,3): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\fegold\GravityPong\GravityPong\CVector2.cpp(25,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  GravityPong.cpp
+  Generating Code...
   GravityPong.vcxproj -> D:\fegold\GravityPong\GravityPong\Debug\GravityPong.exe

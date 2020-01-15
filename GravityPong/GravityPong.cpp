@@ -6,14 +6,15 @@
 #include "CBall.h"
 #include <iostream>
 #include <SDL.h>
+#include <SDL_image.h>
 
 #define TICK_INTERVAL 5
 
 int main(int argc, char* argv[])
 {
-	CPlayer* Player1 = new CPlayer(0, 0, 'w', 's', 'a', 'd', (450, 500));
-	CPlayer* Player2 = new CPlayer(0, 0, 'i', 'k', 'j', 'l', (650, 500));
-	CBall* myBall = new CBall(0, 0); 
+	CPlayer* Player1 = new CPlayer(0, 0, 'w', 's', 'a', 'd', CVector2(windowWidth / 4, windowHeight / 2));
+	CPlayer* Player2 = new CPlayer(0, 0, 'i', 'k', 'j', 'l', CVector2(windowWidth / 4 * 3, windowHeight / 2));
+	CBall* myBall = new CBall(windowWidth / 2, windowHeight / 2);
 	EGameState activeGameState = EGameState::Active;
 	static ETheme activeTheme = ETheme::Dark;
 
@@ -26,6 +27,8 @@ int main(int argc, char* argv[])
 		if (SDL_CreateWindowAndRenderer(windowWidth, windowHeight, 0, &Window, &Renderer) == 0)
 		{
 			SDL_bool completed = SDL_FALSE;
+			SDL_Texture* circleImage = IMG_LoadTexture(Renderer, "data/textures/circle.png");
+			SDL_SetTextureAlphaMod(circleImage, 40);
 
 			//game loop
 			while (!completed)
@@ -57,8 +60,8 @@ int main(int argc, char* argv[])
 				case(EGameState::Active):
 					Player1->Update((float)TICK_INTERVAL / 1000.f);
 					Player2->Update((float)TICK_INTERVAL / 1000.f);
-					Player1->Render(*Renderer);
-					Player2->Render(*Renderer);
+					Player1->Render(*Renderer, *Window, *circleImage);
+					Player2->Render(*Renderer, *Window, *circleImage);
 					break;
 				case(EGameState::Paused):
 					break;

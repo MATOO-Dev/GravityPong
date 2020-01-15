@@ -10,7 +10,7 @@ public:
 	CPlayer(float xVal, float yVal, char up, char down, char left, char right, CVector2 startPosition);
 	~CPlayer();
 	void Update(float timeStep);
-	void Render(SDL_Renderer& renderer) const;
+	void Render(SDL_Renderer& renderer, SDL_Window& window, SDL_Texture& circleImage) const;
 	const CVector2& GetPosition() const;
 	void SetPosition(CVector2 newPosition);
 	const CVector2& GetVelocity() const;
@@ -32,6 +32,7 @@ private:
 	float gravityRadius;
 	float graphicsRadius;
 	float rotationRate;
+	SDL_Rect circleCanvas;
 	CVector2 graphicsOffsets2[8];
 	std::vector<CVector2> graphicsOffsets;
 };
