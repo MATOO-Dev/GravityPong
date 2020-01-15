@@ -7,18 +7,19 @@
 class CPlayer
 {
 public:
-	CPlayer(float xVal, float yVal, char up, char down, char left, char right, CVector2 startPosition);
+	CPlayer(char up, char down, char left, char right, CVector2 startPosition);
 	~CPlayer();
 	void Update(float timeStep);
-	void Render(SDL_Renderer& renderer, SDL_Window& window, SDL_Texture& circleImage) const;
+	void Render(SDL_Renderer& renderer, SDL_Texture& gravityImage) const;
 	const CVector2& GetPosition() const;
 	void SetPosition(CVector2 newPosition);
 	const CVector2& GetVelocity() const;
 	void SetVelocity(CVector2 newVelocity);
 	void AddVelocity(CVector2 addend);
+	float GetMass() const;
+	void SetMass(const float newMass);
+	void Score();
 private:
-	float x;
-	float y;
 	const char upKey;
 	const char downKey;
 	const char rightKey;
@@ -28,11 +29,12 @@ private:
 	const float moveSpeed = 500;
 	const float dragMultiplier = 0.75;
 	float mScore;
+	float mMass;
 	float eventHorizonRadius;
 	float gravityRadius;
 	float graphicsRadius;
 	float rotationRate;
-	SDL_Rect circleCanvas;
+	SDL_Rect gravityCanvas;
 	CVector2 graphicsOffsets2[8];
 	std::vector<CVector2> graphicsOffsets;
 };
@@ -59,5 +61,21 @@ inline void CPlayer::SetVelocity(CVector2 newVelocity)
 
 inline void CPlayer::AddVelocity(CVector2 addend)
 {
+	//subject to review
 	mVelocity = mVelocity + addend;
+}
+
+inline float CPlayer::GetMass() const
+{
+	return mMass;
+}
+
+inline void CPlayer::SetMass(float newMass)
+{
+	mMass = newMass;
+}
+
+inline void CPlayer::Score()
+{
+	mScore++;
 }

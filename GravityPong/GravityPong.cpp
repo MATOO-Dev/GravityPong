@@ -12,9 +12,9 @@
 
 int main(int argc, char* argv[])
 {
-	CPlayer* Player1 = new CPlayer(0, 0, 'w', 's', 'a', 'd', CVector2(windowWidth / 4, windowHeight / 2));
-	CPlayer* Player2 = new CPlayer(0, 0, 'i', 'k', 'j', 'l', CVector2(windowWidth / 4 * 3, windowHeight / 2));
-	CBall* myBall = new CBall(windowWidth / 2, windowHeight / 2);
+	CPlayer* Player1 = new CPlayer('w', 's', 'a', 'd', CVector2(windowWidth / 4, windowHeight / 2));
+	CPlayer* Player2 = new CPlayer('i', 'k', 'j', 'l', CVector2(windowWidth / 4 * 3, windowHeight / 2));
+	CBall* myBall = new CBall();
 	EGameState activeGameState = EGameState::Active;
 	static ETheme activeTheme = ETheme::Dark;
 
@@ -27,8 +27,11 @@ int main(int argc, char* argv[])
 		if (SDL_CreateWindowAndRenderer(windowWidth, windowHeight, 0, &Window, &Renderer) == 0)
 		{
 			SDL_bool completed = SDL_FALSE;
-			SDL_Texture* circleImage = IMG_LoadTexture(Renderer, "data/textures/circle.png");
-			SDL_SetTextureAlphaMod(circleImage, 40);
+			SDL_Texture* gravityImage = IMG_LoadTexture(Renderer, "data/textures/gravity.bmp");
+			SDL_SetTextureAlphaMod(gravityImage, 40);
+			SDL_Texture* ballImage = IMG_LoadTexture(Renderer, "data/textures/ball.bmp");
+
+			int test = 0;
 
 			//game loop
 			while (!completed)
@@ -60,10 +63,15 @@ int main(int argc, char* argv[])
 				case(EGameState::Active):
 					Player1->Update((float)TICK_INTERVAL / 1000.f);
 					Player2->Update((float)TICK_INTERVAL / 1000.f);
-					Player1->Render(*Renderer, *Window, *circleImage);
-					Player2->Render(*Renderer, *Window, *circleImage);
+					myBall->Update((float)TICK_INTERVAL / 1000.f, *Player1, *Player2);
+					Player1->Render(*Renderer, *gravityImage);
+					Player2->Render(*Renderer, *ballImage);
+					myBall->Render(*Renderer, *ballImage);
 					break;
 				case(EGameState::Paused):
+					Player1->Render(*Renderer, *gravityImage);
+					Player2->Render(*Renderer, *gravityImage);
+					myBall->Render(*Renderer, *ballImage);
 					break;
 				case(EGameState::Settings):
 					break;

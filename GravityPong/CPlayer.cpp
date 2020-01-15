@@ -1,8 +1,6 @@
 #include "CPlayer.h"
 
-CPlayer::CPlayer(float xVal, float yVal, char up, char down, char left, char right, CVector2 startPosition) :
-	x(xVal),
-	y(yVal),
+CPlayer::CPlayer(char up, char down, char left, char right, CVector2 startPosition) :
 	upKey(up),
 	downKey(down),
 	leftKey(left),
@@ -10,10 +8,11 @@ CPlayer::CPlayer(float xVal, float yVal, char up, char down, char left, char rig
 	mPosition(CVector2(0, 0)),
 	mVelocity(0, 0),
 	eventHorizonRadius(0),
-	gravityRadius(400),
+	gravityRadius(gravityRadius),
 	graphicsRadius(10),
 	rotationRate(20),
-	circleCanvas({ 0, 0, 1000, 1000 })
+	mMass(10),
+	gravityCanvas({ 0, 0, (int)gravityRadius * 2, (int)gravityRadius * 2})
 {
 	for (int i = 0; i < 8; i++)
 	{
@@ -72,18 +71,17 @@ void CPlayer::Update(float timeStep)
 		mPosition.SetY(windowHeight);
 		SetVelocity(CVector2(mVelocity.GetX(), 0));
 	}
+
 	for (int i = 0; i < graphicsOffsets.size(); i++)
 	{
 		graphicsOffsets[i].rotate(rotationRate);
 	}
 
-	circleCanvas.w = gravityRadius;
-	circleCanvas.h = gravityRadius;
-	circleCanvas.x = mPosition.GetX() - (circleCanvas.w / 2);
-	circleCanvas.y = mPosition.GetY() - (circleCanvas.h / 2);
+	gravityCanvas.x = mPosition.GetX() - (gravityCanvas.w / 2);
+	gravityCanvas.y = mPosition.GetY() - (gravityCanvas.h / 2);
 }
 
-void CPlayer::Render(SDL_Renderer& renderer, SDL_Window& window, SDL_Texture& circleImage) const
+void CPlayer::Render(SDL_Renderer& renderer, SDL_Texture& gravityImage) const
 {
 	std::vector<CVector2> rotatedOffsets;
 	for (int i = 0; i < graphicsOffsets.size(); i++)
@@ -104,6 +102,5 @@ void CPlayer::Render(SDL_Renderer& renderer, SDL_Window& window, SDL_Texture& ci
 		SDL_RenderDrawLine(&renderer, (int)lineOrigin.GetX(), (int)lineOrigin.GetY(), (int)lineTarget.GetX(), (int)lineTarget.GetY());
 	}
 
-	//SDL_BlitSurface(&circleImage, 0, SDL_GetWindowSurface(&window), circleCanvas);
-	SDL_RenderCopy(&renderer, &circleImage, NULL, &circleCanvas);
+	SDL_RenderCopy(&renderer, &gravityImage, NULL, &gravityCanvas);
 }
