@@ -1,0 +1,12 @@
+﻿  CPlayer.cpp
+C:\Users\fegold\OneDrive\Programming III\Abgabe_PAdS_FelixGold\GravityPong\CVector2.h(37,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\fegold\OneDrive\Programming III\Abgabe_PAdS_FelixGold\GravityPong\CPlayer.cpp(20,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\fegold\OneDrive\Programming III\Abgabe_PAdS_FelixGold\GravityPong\CPlayer.cpp(79,110): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\fegold\OneDrive\Programming III\Abgabe_PAdS_FelixGold\GravityPong\CPlayer.cpp(79,90): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\fegold\OneDrive\Programming III\Abgabe_PAdS_FelixGold\GravityPong\CPlayer.cpp(79,69): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\fegold\OneDrive\Programming III\Abgabe_PAdS_FelixGold\GravityPong\CPlayer.cpp(79,49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\fegold\OneDrive\Programming III\Abgabe_PAdS_FelixGold\GravityPong\CPlayer.cpp(80,136): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\fegold\OneDrive\Programming III\Abgabe_PAdS_FelixGold\GravityPong\CPlayer.cpp(80,109): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\fegold\OneDrive\Programming III\Abgabe_PAdS_FelixGold\GravityPong\CPlayer.cpp(80,82): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\fegold\OneDrive\Programming III\Abgabe_PAdS_FelixGold\GravityPong\CPlayer.cpp(80,55): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  GravityPong.vcxproj -> C:\Users\fegold\OneDrive\Programming III\Abgabe_PAdS_FelixGold\GravityPong\Debug\GravityPong.exe
