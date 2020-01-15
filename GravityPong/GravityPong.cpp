@@ -78,7 +78,7 @@ int main(int argc, char* argv[])
 					}
 
 					ticks = SDL_GetTicks() - before;
-					std::cout << ticks << "\n";
+					//std::cout << ticks << "\n";
 				}
 
 				{

@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include <math.h>
 #define pi 3.14159265358
 
@@ -14,6 +15,7 @@ public:
 	CVector2 normalize();
 	float GetY() const;
 	float GetX() const;
+	void PrintVector() const;	//for debugging purposes
 	void SetX(float newX);
 	void SetY(float newY);
 	~CVector2();
@@ -52,12 +54,17 @@ inline float CVector2::GetY() const
 	return y;
 }
 
-inline void CVector2::SetX(float newX)
+inline void CVector2::SetX(const float newX)
 {
 	x = newX;
 }
 
-inline void CVector2::SetY(float newY)
+inline void CVector2::SetY(const float newY)
 {
 	y = newY;
+}
+
+inline void CVector2::PrintVector() const
+{
+	std::cout << "(" << x << ", " << y << ")" << std::endl;
 }

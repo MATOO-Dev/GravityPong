@@ -31,6 +31,7 @@ private:
 	float eventHorizonRadius;
 	float gravityRadius;
 	float graphicsRadius;
+	float rotationRate;
 	CVector2 graphicsOffsets2[8];
 	std::vector<CVector2> graphicsOffsets;
 };
