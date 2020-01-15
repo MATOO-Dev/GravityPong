@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
 					Player2->Update((float)TICK_INTERVAL / 1000.f);
 					myBall->Update((float)TICK_INTERVAL / 1000.f, *Player1, *Player2);
 					Player1->Render(*Renderer, *gravityImage);
-					Player2->Render(*Renderer, *ballImage);
+					Player2->Render(*Renderer, *gravityImage);
 					myBall->Render(*Renderer, *ballImage);
 					break;
 				case(EGameState::Paused):

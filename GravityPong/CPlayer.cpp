@@ -8,10 +8,10 @@ CPlayer::CPlayer(char up, char down, char left, char right, CVector2 startPositi
 	mPosition(CVector2(0, 0)),
 	mVelocity(0, 0),
 	eventHorizonRadius(0),
-	gravityRadius(gravityRadius),
+	gravityRadius(legravityRadius),
 	graphicsRadius(10),
 	rotationRate(20),
-	mMass(10),
+	mMass(6 * 10^24),
 	gravityCanvas({ 0, 0, (int)gravityRadius * 2, (int)gravityRadius * 2})
 {
 	for (int i = 0; i < 8; i++)
