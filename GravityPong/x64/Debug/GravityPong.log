@@ -7,14 +7,7 @@ E:\GravityPong\GravityPong\CVector2.h(44,13): warning C4244: 'return': conversio
 E:\GravityPong\GravityPong\CPlayer.cpp(20,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 E:\GravityPong\GravityPong\CPlayer.cpp(80,37): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 E:\GravityPong\GravityPong\CPlayer.cpp(81,37): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  CVector2.cpp
-E:\GravityPong\GravityPong\Cvector2.h(44,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-E:\GravityPong\GravityPong\CVector2.cpp(19,3): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-E:\GravityPong\GravityPong\CVector2.cpp(20,3): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-E:\GravityPong\GravityPong\CVector2.cpp(25,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-E:\GravityPong\GravityPong\CVector2.cpp(26,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-E:\GravityPong\GravityPong\CVector2.cpp(27,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   GravityPong.cpp
 E:\GravityPong\GravityPong\CVector2.h(44,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
   Generating Code...
-LINK : fatal error LNK1104: cannot open file 'SDL2.lib'
+  GravityPong.vcxproj -> E:\GravityPong\GravityPong\x64\Debug\GravityPong.exe
