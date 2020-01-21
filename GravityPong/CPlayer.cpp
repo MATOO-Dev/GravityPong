@@ -11,7 +11,7 @@ CPlayer::CPlayer(char up, char down, char left, char right, CVector2 startPositi
 	gravityRadius(legravityRadius),
 	graphicsRadius(10),
 	rotationRate(20),
-	mMass(6 * 10^24),
+	mMass((4 * 10^6) * (2 * 10^30)),	//6*10^24
 	gravityCanvas({ 0, 0, (int)gravityRadius * 2, (int)gravityRadius * 2})
 {
 	for (int i = 0; i < 8; i++)
