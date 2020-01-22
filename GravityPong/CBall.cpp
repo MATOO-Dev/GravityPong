@@ -13,28 +13,28 @@ CBall::CBall() :
 
 void CBall::Update(float timeStep, CPlayer& player1, CPlayer& player2)
 {
-	if (mPosition.GetDistance(player1.GetPosition()) < legravityRadius)
+	if (mPosition.GetDistance(player1.GetPosition()) < playerGravityRadius)
 	{
-		
-			//calculates gravitational force based on Newtons gravitational law
+
+		//calculates gravitational force based on Newtons gravitational law
 		float F = G * ((player1.GetMass() * GetMass()) / (mPosition.GetDistance(player1.GetPosition()) * mPosition.GetDistance(player1.GetPosition())));
 
-			//possibly: applies gravitational force similarly to lorentz force (?)
-			//current: applies gravitational force directly
+		//possibly: applies gravitational force similarly to lorentz force (?)
+		//current: applies gravitational force directly
 
-			//mVelocity = mVelocity + (mPosition.GetDistance(player1.GetPosition()) * F) * -1;
+		//mVelocity = mVelocity + (mPosition.GetDistance(player1.GetPosition()) * F) * -1;
 
-			//CVector2 size = GetVelocity();
-			//float F2 = size.Length() *sin(90);
-			//mVelocity = mVelocity + (mPosition.GetDistance(player1.GetPosition()) * F2 * G) * -1;
+		//CVector2 size = GetVelocity();
+		//float F2 = size.Length() *sin(90);
+		//mVelocity = mVelocity + (mPosition.GetDistance(player1.GetPosition()) * F2 * G) * -1;
 
-			//float test = pi * 2;
-			//float F3 = test * test * (mPosition.GetDistance(player1.GetPosition()) / 24 * 24);
+		//float test = pi * 2;
+		//float F3 = test * test * (mPosition.GetDistance(player1.GetPosition()) / 24 * 24);
 
-			//float F4 = G * (player1.GetMass() / mPosition.GetDistance(player1.GetPosition()) * 2);
-			//mVelocity = mVelocity + CVector2(F3, F3);
-		
-		//todo: search for orbit calculations
+		//float F4 = G * (player1.GetMass() / mPosition.GetDistance(player1.GetPosition()) * 2);
+		//mVelocity = mVelocity + CVector2(F3, F3);
+
+	//todo: search for orbit calculations
 		float gravityMultiplier = 20;
 		CVector2 directionVector = player1.GetPosition() - GetPosition();
 		directionVector = directionVector.Normalize();
@@ -47,13 +47,11 @@ void CBall::Update(float timeStep, CPlayer& player1, CPlayer& player2)
 
 	if (mPosition.GetX() < 0)
 	{
-		player2.Score();
-		SetVelocity(CVector2(0, mVelocity.GetY()));
+		player2.IncrementScore();
 	}
 	if (mPosition.GetX() > windowWidth)
 	{
-		player1.Score();
-		SetVelocity(CVector2(0, mVelocity.GetY()));
+		player1.IncrementScore();
 	}
 	if (mPosition.GetY() < 0)
 	{

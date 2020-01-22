@@ -162,6 +162,7 @@
     <ClCompile Include="CBall.cpp" />
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CVector2.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GravityPong.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +170,10 @@
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CVector2.h" />
     <ClInclude Include="Defines.h" />
+    <ClInclude Include="GameManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -18,7 +18,7 @@ public:
 	void AddVelocity(CVector2 addend);
 	float GetMass() const;
 	void SetMass(const float newMass);
-	void Score();
+	void IncrementScore();
 private:
 	const char upKey;
 	const char downKey;
@@ -75,7 +75,7 @@ inline void CPlayer::SetMass(float newMass)
 	mMass = newMass;
 }
 
-inline void CPlayer::Score()
+inline void CPlayer::IncrementScore()
 {
 	mScore++;
 }

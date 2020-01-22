@@ -8,7 +8,7 @@ CPlayer::CPlayer(char up, char down, char left, char right, CVector2 startPositi
 	mPosition(CVector2(0, 0)),
 	mVelocity(0, 0),
 	eventHorizonRadius(0),
-	gravityRadius(legravityRadius),
+	gravityRadius(playerGravityRadius),
 	graphicsRadius(10),
 	rotationRate(20),
 	mMass((4 * 10^6) * (2 * 10^30)),	//6*10^24

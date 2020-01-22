@@ -1,6 +1,11 @@
 ﻿  CBall.cpp
 D:\fegold\GravityPong\GravityPong\CVector2.h(44,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
 D:\fegold\GravityPong\GravityPong\CBall.cpp(20,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\fegold\GravityPong\GravityPong\CBall.cpp(67,34): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\fegold\GravityPong\GravityPong\CBall.cpp(68,34): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\fegold\GravityPong\GravityPong\CBall.cpp(65,34): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\fegold\GravityPong\GravityPong\CBall.cpp(66,34): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  GameManager.cpp
+D:\fegold\GravityPong\GravityPong\CVector2.h(44,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  GravityPong.cpp
+D:\fegold\GravityPong\GravityPong\CVector2.h(44,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
   GravityPong.vcxproj -> D:\fegold\GravityPong\GravityPong\x64\Debug\GravityPong.exe

@@ -4,6 +4,7 @@
 #include "Defines.h"
 #include "CPlayer.h"
 #include "CBall.h"
+#include "GameManager.h"
 #include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
@@ -15,6 +16,7 @@ int main(int argc, char* argv[])
 	CPlayer* Player1 = new CPlayer('w', 's', 'a', 'd', CVector2(windowWidth / 4, windowHeight / 2));
 	CPlayer* Player2 = new CPlayer('i', 'k', 'j', 'l', CVector2(windowWidth / 4 * 3, windowHeight / 2));
 	CBall* myBall = new CBall();
+	//GameManager* GMInstance = new GameManager(*Player1, *Player2, *myBall);
 	EGameState activeGameState = EGameState::Active;
 	static ETheme activeTheme = ETheme::Dark;
 
