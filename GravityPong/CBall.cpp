@@ -37,7 +37,36 @@ void CBall::Update(float timeStep, CPlayer& player1, CPlayer& player2)
 	//todo: search for orbit calculations
 		float gravityMultiplier = 20;
 		CVector2 directionVector = player1.GetPosition() - GetPosition();
-		directionVector = directionVector.Normalize();
+		directionVector = directionVector.normalize();
+		F = F * gravityMultiplier;
+		directionVector = directionVector * F;
+		mVelocity = mVelocity + directionVector;
+	}
+	if (mPosition.GetDistance(player2.GetPosition()) < playerGravityRadius)
+	{
+
+		//calculates gravitational force based on Newtons gravitational law
+		float F = G * ((player2.GetMass() * GetMass()) / (mPosition.GetDistance(player2.GetPosition()) * mPosition.GetDistance(player2.GetPosition())));
+
+		//possibly: applies gravitational force similarly to lorentz force (?)
+		//current: applies gravitational force directly
+
+		//mVelocity = mVelocity + (mPosition.GetDistance(player1.GetPosition()) * F) * -1;
+
+		//CVector2 size = GetVelocity();
+		//float F2 = size.Length() *sin(90);
+		//mVelocity = mVelocity + (mPosition.GetDistance(player1.GetPosition()) * F2 * G) * -1;
+
+		//float test = pi * 2;
+		//float F3 = test * test * (mPosition.GetDistance(player1.GetPosition()) / 24 * 24);
+
+		//float F4 = G * (player1.GetMass() / mPosition.GetDistance(player1.GetPosition()) * 2);
+		//mVelocity = mVelocity + CVector2(F3, F3);
+
+	//todo: search for orbit calculations
+		float gravityMultiplier = 20;
+		CVector2 directionVector = player2.GetPosition() - GetPosition();
+		directionVector = directionVector.normalize();
 		F = F * gravityMultiplier;
 		directionVector = directionVector * F;
 		mVelocity = mVelocity + directionVector;

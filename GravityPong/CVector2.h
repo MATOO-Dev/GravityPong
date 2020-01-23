@@ -11,8 +11,8 @@ public:
 	CVector2(CVector2 target, CVector2 origin);
 	CVector2(float angleDeg);
 	void rotate(float angleDeg);
-	float Length();
-	CVector2 Normalize();
+	float length();
+	CVector2 normalize();
 	float GetDistance(const CVector2 other) const;
 	float GetY() const;
 	float GetX() const;
@@ -39,20 +39,20 @@ inline CVector2 operator*(const CVector2& base, const float& multiplier)
 	return(CVector2(base.GetX() * multiplier, base.GetY() * multiplier));
 }
 
-inline float CVector2::Length()
+inline float CVector2::length()
 {
 	return(sqrt((x * x) + (y * y)));
 }
 
-inline CVector2 CVector2::Normalize()
+inline CVector2 CVector2::normalize()
 {
-	return(CVector2(x / this->Length(), y / this->Length()));
+	return(CVector2(x / this->length(), y / this->length()));
 }
 
 inline float CVector2::GetDistance(const CVector2 other) const
 {
 	CVector2 connection = CVector2(other - CVector2(x, y));
-	return connection.Length();
+	return connection.length();
 }
 
 inline float CVector2::GetX() const

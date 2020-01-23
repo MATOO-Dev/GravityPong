@@ -2,7 +2,6 @@
 
 #include "CVector2.h"
 #include "CPlayer.h"
-#include "GameManager.h"
 #include "Defines.h"
 #include <SDL.h>
 
