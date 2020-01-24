@@ -34,6 +34,7 @@ int main(int argc, char* argv[])
 			SDL_Texture* gameOverImage = IMG_LoadTexture(Renderer, "data/textures/GameOverText.bmp");
 
 			int test = 0;
+			GMInstance->ServeBall();
 
 			//game loop
 			while (!completed)
@@ -60,7 +61,7 @@ int main(int argc, char* argv[])
 					Player2->Render(*Renderer, *gravityImage);
 					myBall->Render(*Renderer, *ballImage);
 					//manages functions centrally
-					GMInstance->watchBall();
+					GMInstance->WatchBall();
 					GMInstance->Update(activeGameState);
 					GMInstance->DisplayScore(*Player1, *Renderer, 50);
 					GMInstance->DisplayScore(*Player2, *Renderer, 1835);

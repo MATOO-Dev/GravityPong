@@ -12,7 +12,6 @@ void GameManager::Update(EGameState& currentGameState)
 
 	if (keyInput[SDL_Scancode(SDL_SCANCODE_ESCAPE)])
 	{
-		std::cout << "requesting gamestate toggle" << std::endl;
 		ToggleGameState(currentGameState);
 	}
 
@@ -24,18 +23,21 @@ void GameManager::Update(EGameState& currentGameState)
 	}
 }
 
-void GameManager::watchBall()
+void GameManager::WatchBall()
 {
 	if (ball.GetPosition().GetX() < 0 || ball.GetPosition().GetX() > windowWidth)
 	{
-		resetBoard();
-		serveBall();
+		ResetBoard();
+		ServeBall();
 	}
 	if (ball.GetPosition().GetY() < -90)
-		resetBoard();
+	{
+		ResetBoard();
+		ServeBall();
+	}
 }
 
-void GameManager::resetBoard()
+void GameManager::ResetBoard()
 {
 	ball.SetVelocity(CVector2(0, 0));
 	ball.SetPosition(CVector2(windowWidth / 2, windowHeight / 2));
@@ -45,16 +47,15 @@ void GameManager::resetBoard()
 	player2.SetPosition(CVector2(windowWidth / 4 * 3, windowHeight / 2));
 }
 
-void GameManager::serveBall()
+void GameManager::ServeBall()
 {
 	CVector2 newBallDirection = (windowWidth / 2, windowHeight / 2);
-	int newBallHeading = rand() % 1;
-	std::cout << newBallHeading << std::endl;
-	newBallDirection.rotate(newBallHeading);
+	int newBallHeading = rand() % 360;
+	newBallDirection.Rotate(newBallHeading);
 	//subject to change
 	float ballSpeed = 500;
 	//
-	ball.SetVelocity(newBallDirection.normalize() * ballSpeed);
+	ball.SetVelocity(newBallDirection.Normalize() * ballSpeed);
 }
 
 void GameManager::ToggleGameState(EGameState& currentGameState)

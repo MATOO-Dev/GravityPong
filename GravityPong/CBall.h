@@ -26,36 +26,43 @@ private:
 	SDL_Rect ballCanvas;
 };
 
+//returns position as reference
 inline const CVector2& CBall::GetPosition() const
 {
 	return mPosition;
 }
 
+//sets position
 inline void CBall::SetPosition(CVector2 newPosition)
 {
 	mPosition = newPosition;
 }
 
+//returns velocity as reference
 inline const CVector2& CBall::GetVelocity() const
 {
 	return mVelocity;
 }
 
+//sets velocity
 inline void CBall::SetVelocity(CVector2 newVelocity)
 {
 	mVelocity = newVelocity;
 }
 
+//adds velocity
 inline void CBall::AddVelocity(CVector2 addend)
 {
 	mVelocity = mVelocity + addend;
 }
 
+//gets mass of ball (for gravitational calculations)
 inline float CBall::GetMass() const
 {
 	return mMass;
 }
 
+//sets mass of ball
 inline void CBall::SetMass(float newMass)
 {
 	mMass = newMass;

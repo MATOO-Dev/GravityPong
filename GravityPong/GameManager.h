@@ -15,9 +15,9 @@ private:
 public:
 	GameManager(CPlayer& player1Ref, CPlayer& player2Red, CBall& ballRef);
 	void Update(EGameState& currentGameState);
-	void watchBall();
-	void resetBoard();
-	void serveBall();
+	void WatchBall();
+	void ResetBoard();
+	void ServeBall();
 	void ToggleGameState(EGameState& currentGameState);
 	void DisplayScore(CPlayer& targetPlayer, SDL_Renderer& renderer, int xCoord);
 };

@@ -1,5 +1,6 @@
 #include "CPlayer.h"
 
+//constructor for CPlayer
 CPlayer::CPlayer(char up, char down, char left, char right, SDL_Scancode grav, CVector2 startPosition, int side) :
 	upKey(up),
 	downKey(down),
@@ -8,7 +9,7 @@ CPlayer::CPlayer(char up, char down, char left, char right, SDL_Scancode grav, C
 	gravKey(grav),
 	mPosition(CVector2(0, 0)),
 	mVelocity(0, 0),
-	mScore(4),
+	mScore(0),
 	gravityRadius(200),
 	graphicsRadius(10),
 	rotationRate(20),
@@ -19,7 +20,7 @@ CPlayer::CPlayer(char up, char down, char left, char right, SDL_Scancode grav, C
 	for (int i = 0; i < 8; i++)
 	{
 		graphicsOffsets.push_back(CVector2(mPosition.GetX() - GetGraphicsRadius(), mPosition.GetY()));
-		graphicsOffsets[i].rotate(45 * i);
+		graphicsOffsets[i].Rotate(45 * i);
 		graphicsOffsets[i].SetX(mPosition.GetX() + graphicsOffsets[i].GetX());
 		graphicsOffsets[i].SetY(mPosition.GetY() + graphicsOffsets[i].GetY());
 	}
@@ -95,7 +96,7 @@ void CPlayer::Update(float timeStep)
 	//rotate player graphic
 	for (int i = 0; i < graphicsOffsets.size(); i++)
 	{
-		graphicsOffsets[i].rotate(rotationRate);
+		graphicsOffsets[i].Rotate(rotationRate);
 	}
 
 	//set player gravity radius circle position
