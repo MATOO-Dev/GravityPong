@@ -6,6 +6,14 @@ GameManager::GameManager(CPlayer& player1Ref, CPlayer& player2Ref, CBall& ballRe
 	ball(ballRef)
 {}
 
+GameManager::~GameManager()
+{
+	//delete *player1;
+	//delete *player2;
+	//delete ball;
+}
+
+//checks whether escape is pressed and ends game if score of 5 is reached
 void GameManager::Update(EGameState& currentGameState)
 {
 	const Uint8* keyInput = SDL_GetKeyboardState(NULL);
@@ -23,6 +31,20 @@ void GameManager::Update(EGameState& currentGameState)
 	}
 }
 
+//exits the game if enter is pressed while paused or ended
+bool GameManager::Exit(EGameState& currentGameState, bool gameLoopRequirement)
+{
+	const Uint8* keyInput = SDL_GetKeyboardState(NULL);
+
+	if (keyInput[SDL_Scancode(SDL_SCANCODE_RETURN)] && (currentGameState == EGameState::Paused || currentGameState == EGameState::GameOver))
+	{
+		return true;
+	}
+	else
+		return false;
+}
+
+//checks ball position and calls resetboard and serveball if necessary
 void GameManager::WatchBall()
 {
 	if (ball.GetPosition().GetX() < 0 || ball.GetPosition().GetX() > windowWidth)
@@ -37,6 +59,7 @@ void GameManager::WatchBall()
 	}
 }
 
+//resets player and ball positions and velocities
 void GameManager::ResetBoard()
 {
 	ball.SetVelocity(CVector2(0, 0));
@@ -47,6 +70,7 @@ void GameManager::ResetBoard()
 	player2.SetPosition(CVector2(windowWidth / 4 * 3, windowHeight / 2));
 }
 
+//shoots ball into a random direction
 void GameManager::ServeBall()
 {
 	CVector2 newBallDirection = (windowWidth / 2, windowHeight / 2);
@@ -58,6 +82,7 @@ void GameManager::ServeBall()
 	ball.SetVelocity(newBallDirection.Normalize() * ballSpeed);
 }
 
+//toggles between active and paused
 void GameManager::ToggleGameState(EGameState& currentGameState)
 {
 	SDL_Delay(200);
@@ -67,11 +92,13 @@ void GameManager::ToggleGameState(EGameState& currentGameState)
 		currentGameState = EGameState::Active;
 }
 
+//displays score
 void GameManager::DisplayScore(CPlayer& targetPlayer, SDL_Renderer& renderer, int xCoord)
 {
 	int baseX = xCoord;
 	int baseY = 50;
 
+	//targetplayer.getscore() cannot be called in a switch, using multiple if functions instead
 	if (targetPlayer.GetScore() > 0 && targetPlayer.GetScore() < 5)
 	{
 		for (int i = 0; i < targetPlayer.GetScore(); i++)

@@ -14,7 +14,9 @@ private:
 	CBall& ball;
 public:
 	GameManager(CPlayer& player1Ref, CPlayer& player2Red, CBall& ballRef);
+	~GameManager();
 	void Update(EGameState& currentGameState);
+	bool Exit(EGameState& currentGameState, bool gameLoopRequirement);
 	void WatchBall();
 	void ResetBoard();
 	void ServeBall();

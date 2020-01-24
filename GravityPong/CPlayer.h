@@ -1,6 +1,8 @@
 #pragma once
+
 #include "CVector2.h"
 #include "Defines.h"
+
 #include <SDL.h>
 #include <vector>
 
@@ -44,62 +46,74 @@ private:
 	std::vector<CVector2> graphicsOffsets;
 };
 
+//returns position as reference
 inline const CVector2& CPlayer::GetPosition() const
 {
 	return mPosition;
 }
 
+//sets position
 inline void CPlayer::SetPosition(CVector2 newPosition)
 {
 	mPosition = newPosition;
 }
 
+//returns velocity as reference
 inline const CVector2& CPlayer::GetVelocity() const
 {
 	return mVelocity;
 }
 
+//sets velocity
 inline void CPlayer::SetVelocity(CVector2 newVelocity)
 {
 	mVelocity = newVelocity;
 }
 
+//adds to velocity
 inline void CPlayer::AddVelocity(CVector2 addend)
 {
 	//subject to review
 	mVelocity = mVelocity + addend;
 }
 
+//returns mass (for gravitational calculations)
 inline float CPlayer::GetMass() const
 {
 	return mMass;
 }
 
+//sets mass
 inline void CPlayer::SetMass(float newMass)
 {
 	mMass = newMass;
 }
 
+//returns radius of gravitational influence
 inline float CPlayer::GetGravityRadius()
 {
 	return gravityRadius;
 }
 
+//returns whether gravity is active or inactive
 inline bool CPlayer::GetGravityState()
 {
 	return mGravityActive;
 }
 
+//returns radius of attached graphic
 inline float CPlayer::GetGraphicsRadius()
 {
 	return graphicsRadius;
 }
 
+//increases score by 1
 inline void CPlayer::IncrementScore()
 {
 	mScore++;
 }
 
+//returns score
 inline int CPlayer::GetScore()
 {
 	return mScore;

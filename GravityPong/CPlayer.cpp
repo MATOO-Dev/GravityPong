@@ -27,6 +27,7 @@ CPlayer::CPlayer(char up, char down, char left, char right, SDL_Scancode grav, C
 	SetPosition(startPosition);
 }
 
+//updates position and velocity of this and attached graphic, rotates circle
 void CPlayer::Update(float timeStep)
 {
 	SetPosition(GetPosition() + (GetVelocity() * timeStep));
@@ -104,6 +105,7 @@ void CPlayer::Update(float timeStep)
 	gravityCanvas.y = mPosition.GetY() - (gravityCanvas.h / 2);
 }
 
+//renders star, displays attached graphic
 void CPlayer::Render(SDL_Renderer& renderer, SDL_Texture& gravityImage) const
 {
 	std::vector<CVector2> rotatedOffsets;
