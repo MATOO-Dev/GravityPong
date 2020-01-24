@@ -28,16 +28,16 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="CVector2">
-    <Position X="4" Y="3" Width="2" />
+    <Position X="4" Y="3.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AQAAAABAAAAQAAYAAEAQABAAAAAAAAAAYABgAAAAAAA=</HashCode>
+      <HashCode>AQAAAABAAAAAAAYAEAAAAABAEAAAAAAAYABgAAAAAAA=</HashCode>
       <FileName>CVector2.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameManager">
     <Position X="4" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>wBQAgAAAAAAAAAUAAAAAAAAAIAAAAAAAAAAAAABAAEA=</HashCode>
+      <HashCode>wBQAwAAABQAAAAAAAAAAAAAAIAAAAAAAIAAAAABQAAA=</HashCode>
       <FileName>GameManager.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
