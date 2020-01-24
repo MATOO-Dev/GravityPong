@@ -19,4 +19,5 @@ public:
 	void resetBoard();
 	void serveBall();
 	void ToggleGameState(EGameState& currentGameState);
+	void DisplayScore(CPlayer& targetPlayer, SDL_Renderer& renderer, int xCoord);
 };

@@ -35,7 +35,16 @@ void CBall::Update(float timeStep, CPlayer& player1, CPlayer& player2)
 		directionVector = directionVector * F;
 		mVelocity = mVelocity + directionVector;
 	}
-	if (mPosition.GetDistance(player1.GetPosition()) < player1.GetEventHorizonRadius() || mPosition.GetDistance(player2.GetPosition()) < player2.GetEventHorizonRadius())
+	if (mPosition.GetDistance(player1.GetPosition()) < player1.GetGraphicsRadius() || mPosition.GetDistance(player2.GetPosition()) < player2.GetGraphicsRadius())
+	{
+		if (mPosition.GetDistance(player1.GetPosition()) < mPosition.GetDistance(player2.GetPosition()))
+			player2.IncrementScore();
+		else
+			player1.IncrementScore();
+
+		SetVelocity(CVector2(0, 0));
+		SetPosition(CVector2(windowWidth / 2, -100));
+	}
 
 	SetPosition(GetPosition() + (GetVelocity() * timeStep));
 

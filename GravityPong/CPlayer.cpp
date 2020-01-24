@@ -1,6 +1,6 @@
 #include "CPlayer.h"
 
-CPlayer::CPlayer(char up, char down, char left, char right, SDL_Scancode grav, CVector2 startPosition) :
+CPlayer::CPlayer(char up, char down, char left, char right, SDL_Scancode grav, CVector2 startPosition, int side) :
 	upKey(up),
 	downKey(down),
 	leftKey(left),
@@ -8,16 +8,17 @@ CPlayer::CPlayer(char up, char down, char left, char right, SDL_Scancode grav, C
 	gravKey(grav),
 	mPosition(CVector2(0, 0)),
 	mVelocity(0, 0),
-	eventHorizonRadius(0),
+	mScore(4),
 	gravityRadius(200),
 	graphicsRadius(10),
 	rotationRate(20),
+	boardSide(side),
 	mMass((4 * 10^6) * (2 * 10^30)),	//6*10^24
 	gravityCanvas({ 0, 0, (int)gravityRadius * 2, (int)gravityRadius * 2})
 {
 	for (int i = 0; i < 8; i++)
 	{
-		graphicsOffsets.push_back(CVector2(mPosition.GetX() - graphicsRadius, mPosition.GetY()));
+		graphicsOffsets.push_back(CVector2(mPosition.GetX() - GetGraphicsRadius(), mPosition.GetY()));
 		graphicsOffsets[i].rotate(45 * i);
 		graphicsOffsets[i].SetX(mPosition.GetX() + graphicsOffsets[i].GetX());
 		graphicsOffsets[i].SetY(mPosition.GetY() + graphicsOffsets[i].GetY());
@@ -63,11 +64,7 @@ void CPlayer::Update(float timeStep)
 		mPosition.SetX(0);
 		SetVelocity(CVector2(0, mVelocity.GetY()));
 	}
-	if (mPosition.GetX() > windowWidth)
-	{
-		mPosition.SetX(windowWidth);
-		SetVelocity(CVector2(0, mVelocity.GetY()));
-	}
+
 	if (mPosition.GetY() < 0)
 	{
 		mPosition.SetY(0);
@@ -79,6 +76,22 @@ void CPlayer::Update(float timeStep)
 		SetVelocity(CVector2(mVelocity.GetX(), 0));
 	}
 
+	if (boardSide == 0)
+	{
+		if (mPosition.GetX() > windowWidth / 2)
+		{
+			mPosition.SetX(windowWidth / 2);
+			SetVelocity(CVector2(0, mVelocity.GetY()));
+		}
+	}
+	else
+	{
+		if (mPosition.GetX() < windowWidth / 2)
+		{
+			mPosition.SetX(windowWidth / 2);
+			SetVelocity(CVector2(0, mVelocity.GetY()));
+		}
+	}
 	//rotate player graphic
 	for (int i = 0; i < graphicsOffsets.size(); i++)
 	{

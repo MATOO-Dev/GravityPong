@@ -19,7 +19,7 @@
       </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AIQAAAAEUKQggAgAAAAAgACAAAEgEkgAABgAAiQBAgg=</HashCode>
+      <HashCode>AIQAAAAEEKAgwAggAAAAgACAAAEgEkgBABgAgiQBAgo=</HashCode>
       <FileName>CPlayer.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -28,7 +28,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="CVector2">
-    <Position X="4" Y="2.75" Width="2" />
+    <Position X="4" Y="3" Width="2" />
     <TypeIdentifier>
       <HashCode>AQAAAABAAAAQAAYAAEAQABAAAAAAAAAAYABgAAAAAAA=</HashCode>
       <FileName>CVector2.h</FileName>
@@ -37,7 +37,7 @@
   <Class Name="GameManager">
     <Position X="4" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>wAAAgAAAAAAAAAUAAAAAAAAAIAAAAAAAAAAAAABAAEA=</HashCode>
+      <HashCode>wBQAgAAAAAAAAAUAAAAAAAAAIAAAAAAAAAAAAABAAEA=</HashCode>
       <FileName>GameManager.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -47,9 +47,9 @@
     </ShowAsAssociation>
   </Class>
   <Enum Name="EGameState">
-    <Position X="0.5" Y="4.75" Width="1.5" />
+    <Position X="0.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAggAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
       <FileName>Defines.h</FileName>
     </TypeIdentifier>
   </Enum>

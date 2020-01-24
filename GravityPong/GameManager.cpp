@@ -16,8 +16,12 @@ void GameManager::Update(EGameState& currentGameState)
 		ToggleGameState(currentGameState);
 	}
 
-	if (player1.GetScore() > 10 || player2.GetScore() > 10)
+	if (player1.GetScore() == 5 || player2.GetScore() == 5)
+	{
+		player1.SetPosition(CVector2(windowWidth / 2, windowHeight / 2));
+		player1.SetPosition(CVector2(windowWidth / 2, windowHeight / 2));
 		currentGameState = EGameState::GameOver;
+	}
 }
 
 void GameManager::watchBall()
@@ -27,6 +31,8 @@ void GameManager::watchBall()
 		resetBoard();
 		serveBall();
 	}
+	if (ball.GetPosition().GetY() < -90)
+		resetBoard();
 }
 
 void GameManager::resetBoard()
@@ -42,7 +48,8 @@ void GameManager::resetBoard()
 void GameManager::serveBall()
 {
 	CVector2 newBallDirection = (windowWidth / 2, windowHeight / 2);
-	float newBallHeading = rand() % 365;
+	int newBallHeading = rand() % 1;
+	std::cout << newBallHeading << std::endl;
 	newBallDirection.rotate(newBallHeading);
 	//subject to change
 	float ballSpeed = 500;
@@ -57,4 +64,26 @@ void GameManager::ToggleGameState(EGameState& currentGameState)
 		currentGameState = EGameState::Paused;
 	else
 		currentGameState = EGameState::Active;
+}
+
+void GameManager::DisplayScore(CPlayer& targetPlayer, SDL_Renderer& renderer, int xCoord)
+{
+	int baseX = xCoord;
+	int baseY = 50;
+
+	if (targetPlayer.GetScore() > 0 && targetPlayer.GetScore() < 5)
+	{
+		for (int i = 0; i < targetPlayer.GetScore(); i++)
+		{
+			SDL_RenderDrawLine(&renderer, baseX + (i * 5), baseY, baseX + (i * 5), baseY + 20);
+		}
+	}
+	if (targetPlayer.GetScore() == 5)
+	{
+		for (int i = 0; i < targetPlayer.GetScore() - 1; i++)
+		{
+			SDL_RenderDrawLine(&renderer, baseX + (i * 5), baseY, baseX + (i * 5), baseY + 20);
+		}
+		SDL_RenderDrawLine(&renderer, baseX - 5, baseY + (20 / 2), baseX + (targetPlayer.GetScore() - 1) * 5, baseY + (20 / 2));
+	}
 }

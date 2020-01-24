@@ -13,8 +13,8 @@
 
 int main(int argc, char* argv[])
 {
-	CPlayer* Player1 = new CPlayer('w', 's', 'a', 'd', SDL_SCANCODE_SPACE, CVector2(windowWidth / 4, windowHeight / 2));
-	CPlayer* Player2 = new CPlayer('i', 'k', 'j', 'l', SDL_SCANCODE_RSHIFT, CVector2(windowWidth / 4 * 3, windowHeight / 2));
+	CPlayer* Player1 = new CPlayer('w', 's', 'a', 'd', SDL_SCANCODE_SPACE, CVector2(windowWidth / 4, windowHeight / 2), 0);
+	CPlayer* Player2 = new CPlayer('i', 'k', 'j', 'l', SDL_SCANCODE_RSHIFT, CVector2(windowWidth / 4 * 3, windowHeight / 2), 1);
 	CBall* myBall = new CBall();
 	GameManager* GMInstance = new GameManager(*Player1, *Player2, *myBall);
 	EGameState activeGameState = EGameState::Active;
@@ -31,6 +31,7 @@ int main(int argc, char* argv[])
 			SDL_Texture* gravityImage = IMG_LoadTexture(Renderer, "data/textures/gravity.bmp");
 			SDL_SetTextureAlphaMod(gravityImage, 40);
 			SDL_Texture* ballImage = IMG_LoadTexture(Renderer, "data/textures/ball.bmp");
+			SDL_Texture* gameOverImage = IMG_LoadTexture(Renderer, "data/textures/GameOverText.bmp");
 
 			int test = 0;
 
@@ -61,6 +62,8 @@ int main(int argc, char* argv[])
 					//manages functions centrally
 					GMInstance->watchBall();
 					GMInstance->Update(activeGameState);
+					GMInstance->DisplayScore(*Player1, *Renderer, 50);
+					GMInstance->DisplayScore(*Player2, *Renderer, 1835);
 					break;
 				case(EGameState::Paused):
 					//renders the game, but doesn't update movement
@@ -69,12 +72,15 @@ int main(int argc, char* argv[])
 					myBall->Render(*Renderer, *ballImage);
 					//this is required in order to get back from paused to active
 					GMInstance->Update(activeGameState);
+					GMInstance->DisplayScore(*Player1, *Renderer, 50);
+					GMInstance->DisplayScore(*Player2, *Renderer, 1835);
 					break;
 				case(EGameState::GameOver):
 					//renders the game, but doesn't update movement
-					Player1->Render(*Renderer, *gravityImage);
-					Player2->Render(*Renderer, *gravityImage);
-					myBall->Render(*Renderer, *ballImage);
+					GMInstance->DisplayScore(*Player1, *Renderer, 50);
+					GMInstance->DisplayScore(*Player2, *Renderer, 1835); 
+					SDL_Rect gameOverCanvas = { 450, 250, 1000, 500};
+					SDL_RenderCopy(Renderer, gameOverImage, NULL, &gameOverCanvas);
 					break;
 				}
 
