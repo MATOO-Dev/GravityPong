@@ -1,10 +1,11 @@
 #include "CPlayer.h"
 
-CPlayer::CPlayer(char up, char down, char left, char right, CVector2 startPosition) :
+CPlayer::CPlayer(char up, char down, char left, char right, SDL_Scancode grav, CVector2 startPosition) :
 	upKey(up),
 	downKey(down),
 	leftKey(left),
 	rightKey(right),
+	gravKey(grav),
 	mPosition(CVector2(0, 0)),
 	mVelocity(0, 0),
 	eventHorizonRadius(0),
@@ -31,8 +32,6 @@ void CPlayer::Update(float timeStep)
 
 	const Uint8* keyInput = SDL_GetKeyboardState(NULL);
 
-
-
 	if (keyInput[SDL_GetScancodeFromKey(upKey)])
 	{
 		AddVelocity(CVector2(0, -moveSpeed));
@@ -49,9 +48,13 @@ void CPlayer::Update(float timeStep)
 	{
 		AddVelocity(CVector2(moveSpeed, 0));
 	}
-	if (keyInput[SDL_GetScancodeFromKey(SDLK_ESCAPE)])
+	if (keyInput[SDL_Scancode(gravKey)])
 	{
-		//GMI.togglegamestate();
+		mGravityActive = true;
+	}
+	else
+	{
+		mGravityActive = false;
 	}
 
 	//keeps Player in bounds(window)
@@ -76,11 +79,13 @@ void CPlayer::Update(float timeStep)
 		SetVelocity(CVector2(mVelocity.GetX(), 0));
 	}
 
+	//rotate player graphic
 	for (int i = 0; i < graphicsOffsets.size(); i++)
 	{
 		graphicsOffsets[i].rotate(rotationRate);
 	}
 
+	//set player gravity radius circle position
 	gravityCanvas.x = mPosition.GetX() - (gravityCanvas.w / 2);
 	gravityCanvas.y = mPosition.GetY() - (gravityCanvas.h / 2);
 }

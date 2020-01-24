@@ -7,7 +7,7 @@
 class CPlayer
 {
 public:
-	CPlayer(char up, char down, char left, char right, CVector2 startPosition);
+	CPlayer(char up, char down, char left, char right, SDL_Scancode grav, CVector2 startPosition);
 	~CPlayer();
 	void Update(float timeStep);
 	void Render(SDL_Renderer& renderer, SDL_Texture& gravityImage) const;
@@ -20,11 +20,15 @@ public:
 	void SetMass(const float newMass);
 	void IncrementScore();
 	float GetGravityRadius();
+	float GetEventHorizonRadius();
+	bool GetGravityState();
+	int GetScore();
 private:
 	const char upKey;
 	const char downKey;
 	const char rightKey;
 	const char leftKey;
+	const SDL_Scancode gravKey;
 	CVector2 mPosition;
 	CVector2 mVelocity;
 	const float moveSpeed = 500;
@@ -35,8 +39,8 @@ private:
 	float gravityRadius;
 	float graphicsRadius;
 	float rotationRate;
+	bool mGravityActive;
 	SDL_Rect gravityCanvas;
-	CVector2 graphicsOffsets2[8];
 	std::vector<CVector2> graphicsOffsets;
 };
 
@@ -78,10 +82,25 @@ inline void CPlayer::SetMass(float newMass)
 
 inline float CPlayer::GetGravityRadius()
 {
-	gravityRadius;
+	return gravityRadius;
+}
+
+inline bool CPlayer::GetGravityState()
+{
+	return mGravityActive;
+}
+
+inline float CPlayer::GetEventHorizonRadius()
+{
+	return eventHorizonRadius;
 }
 
 inline void CPlayer::IncrementScore()
 {
 	mScore++;
+}
+
+inline int CPlayer::GetScore()
+{
+	return mScore;
 }

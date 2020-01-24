@@ -13,8 +13,8 @@
 
 int main(int argc, char* argv[])
 {
-	CPlayer* Player1 = new CPlayer('w', 's', 'a', 'd', CVector2(windowWidth / 4, windowHeight / 2));
-	CPlayer* Player2 = new CPlayer('i', 'k', 'j', 'l', CVector2(windowWidth / 4 * 3, windowHeight / 2));
+	CPlayer* Player1 = new CPlayer('w', 's', 'a', 'd', SDL_SCANCODE_SPACE, CVector2(windowWidth / 4, windowHeight / 2));
+	CPlayer* Player2 = new CPlayer('i', 'k', 'j', 'l', SDL_SCANCODE_RSHIFT, CVector2(windowWidth / 4 * 3, windowHeight / 2));
 	CBall* myBall = new CBall();
 	GameManager* GMInstance = new GameManager(*Player1, *Player2, *myBall);
 	EGameState activeGameState = EGameState::Active;
@@ -50,15 +50,28 @@ int main(int argc, char* argv[])
 				switch (activeGameState)
 				{
 				case(EGameState::Active):
+					//updates movement
 					Player1->Update((float)TICK_INTERVAL / 1000.f);
 					Player2->Update((float)TICK_INTERVAL / 1000.f);
 					myBall->Update((float)TICK_INTERVAL / 1000.f, *Player1, *Player2);
+					//renders
 					Player1->Render(*Renderer, *gravityImage);
 					Player2->Render(*Renderer, *gravityImage);
 					myBall->Render(*Renderer, *ballImage);
+					//manages functions centrally
 					GMInstance->watchBall();
+					GMInstance->Update(activeGameState);
 					break;
 				case(EGameState::Paused):
+					//renders the game, but doesn't update movement
+					Player1->Render(*Renderer, *gravityImage);
+					Player2->Render(*Renderer, *gravityImage);
+					myBall->Render(*Renderer, *ballImage);
+					//this is required in order to get back from paused to active
+					GMInstance->Update(activeGameState);
+					break;
+				case(EGameState::GameOver):
+					//renders the game, but doesn't update movement
 					Player1->Render(*Renderer, *gravityImage);
 					Player2->Render(*Renderer, *gravityImage);
 					myBall->Render(*Renderer, *ballImage);

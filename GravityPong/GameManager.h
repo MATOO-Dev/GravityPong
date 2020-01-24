@@ -4,6 +4,7 @@
 #include "CBall.h"
 #include "CPlayer.h"
 #include <SDL.h>
+#include <iostream>
 
 class GameManager
 {
@@ -13,9 +14,9 @@ private:
 	CBall& ball;
 public:
 	GameManager(CPlayer& player1Ref, CPlayer& player2Red, CBall& ballRef);
+	void Update(EGameState& currentGameState);
 	void watchBall();
 	void resetBoard();
-	void serveBall(); 
-	static void ToggleGameState(EGameState currentGameState);
+	void serveBall();
+	void ToggleGameState(EGameState& currentGameState);
 };
-

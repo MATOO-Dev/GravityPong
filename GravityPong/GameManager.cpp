@@ -1,10 +1,24 @@
 #include "GameManager.h"
 
-GameManager::GameManager(CPlayer& player1Ref, CPlayer& player2Ref, CBall& ballRef):
-player1(player1Ref),
-player2(player2Ref),
-ball(ballRef)
+GameManager::GameManager(CPlayer& player1Ref, CPlayer& player2Ref, CBall& ballRef) :
+	player1(player1Ref),
+	player2(player2Ref),
+	ball(ballRef)
 {}
+
+void GameManager::Update(EGameState& currentGameState)
+{
+	const Uint8* keyInput = SDL_GetKeyboardState(NULL);
+
+	if (keyInput[SDL_Scancode(SDL_SCANCODE_ESCAPE)])
+	{
+		std::cout << "requesting gamestate toggle" << std::endl;
+		ToggleGameState(currentGameState);
+	}
+
+	if (player1.GetScore() > 10 || player2.GetScore() > 10)
+		currentGameState = EGameState::GameOver;
+}
 
 void GameManager::watchBall()
 {
@@ -36,8 +50,9 @@ void GameManager::serveBall()
 	ball.SetVelocity(newBallDirection.normalize() * ballSpeed);
 }
 
-void GameManager::ToggleGameState(EGameState currentGameState)
+void GameManager::ToggleGameState(EGameState& currentGameState)
 {
+	SDL_Delay(200);
 	if (currentGameState == EGameState::Active)
 		currentGameState = EGameState::Paused;
 	else
