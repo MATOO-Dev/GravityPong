@@ -13,7 +13,7 @@ CBall::CBall() :
 
 void CBall::Update(float timeStep, CPlayer& player1, CPlayer& player2)
 {
-	if (mPosition.GetDistance(player1.GetPosition()) < playerGravityRadius)
+	if (mPosition.GetDistance(player1.GetPosition()) < 200)
 	{
 
 		//calculates gravitational force based on Newtons gravitational law
@@ -42,7 +42,7 @@ void CBall::Update(float timeStep, CPlayer& player1, CPlayer& player2)
 		directionVector = directionVector * F;
 		mVelocity = mVelocity + directionVector;
 	}
-	if (mPosition.GetDistance(player2.GetPosition()) < playerGravityRadius)
+	if (mPosition.GetDistance(player2.GetPosition()) < 200)
 	{
 
 		//calculates gravitational force based on Newtons gravitational law

@@ -35,3 +35,11 @@ void GameManager::serveBall()
 	//
 	ball.SetVelocity(newBallDirection.normalize() * ballSpeed);
 }
+
+void GameManager::ToggleGameState(EGameState currentGameState)
+{
+	if (currentGameState == EGameState::Active)
+		currentGameState = EGameState::Paused;
+	else
+		currentGameState = EGameState::Active;
+}

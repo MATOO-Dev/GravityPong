@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Defines.h"
 #include "CBall.h"
 #include "CPlayer.h"
 #include <SDL.h>
@@ -14,6 +15,7 @@ public:
 	GameManager(CPlayer& player1Ref, CPlayer& player2Red, CBall& ballRef);
 	void watchBall();
 	void resetBoard();
-	void serveBall();
+	void serveBall(); 
+	static void ToggleGameState(EGameState currentGameState);
 };
 

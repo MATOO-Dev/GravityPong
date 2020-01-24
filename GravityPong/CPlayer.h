@@ -19,6 +19,7 @@ public:
 	float GetMass() const;
 	void SetMass(const float newMass);
 	void IncrementScore();
+	float GetGravityRadius();
 private:
 	const char upKey;
 	const char downKey;
@@ -73,6 +74,11 @@ inline float CPlayer::GetMass() const
 inline void CPlayer::SetMass(float newMass)
 {
 	mMass = newMass;
+}
+
+inline float CPlayer::GetGravityRadius()
+{
+	gravityRadius;
 }
 
 inline void CPlayer::IncrementScore()
