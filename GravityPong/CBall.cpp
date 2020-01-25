@@ -1,53 +1,61 @@
 #include "CBall.h"
 
-#define G (6.674 * (10^-11))	//gravitational constant, in reality 6.674 * (10^-11)
+#define G (6.674 * (10^1))	//gravitational constant, in reality 6.674 * (10^-11)
 
+//constructor for CBall
 CBall::CBall() :
 	mPosition(windowWidth / 2, windowHeight / 2),
-	mVelocity(0, -500),
+	mVelocity(0, 0),
 	ballRadius(5),
 	mMass(1),
 	ballCanvas({ 0, 0, (int)ballRadius * 2, (int)ballRadius * 2 })
 {}
 
+//updates mposition and velocity of this and attached graphic
 void CBall::Update(float timeStep, CPlayer& player1, CPlayer& player2)
 {
-	if (mPosition.GetDistance(player1.GetPosition()) < legravityRadius)
+	if (mPosition.GetDistance(player1.GetPosition()) < player1.GetGravityRadius() && player1.GetGravityState())
 	{
-		{
-			//calculates gravitational force based on Newtons gravitational law
-			//float F = G * ((player1.GetMass() * GetMass()) / (mPosition.GetDistance(player1.GetPosition()) * mPosition.GetDistance(player1.GetPosition())));
+		//calculates gravitational force based on Newtons gravitational law
+		float F = G * ((player1.GetMass() * GetMass()) / (mPosition.GetDistance(player1.GetPosition()) * mPosition.GetDistance(player1.GetPosition())));
+		float gravityMultiplier = 20;
+		CVector2 directionVector = player1.GetPosition() - GetPosition();
+		directionVector = directionVector.Normalize();
+		F = F * gravityMultiplier;
+		directionVector = directionVector * F;
+		mVelocity = mVelocity + directionVector;
+	}
+	if (mPosition.GetDistance(player2.GetPosition()) < player2.GetGravityRadius() && player2.GetGravityState())
+	{
+		//calculates gravitational force based on Newtons gravitational law
+		float F = G * ((player2.GetMass() * GetMass()) / (mPosition.GetDistance(player2.GetPosition()) * mPosition.GetDistance(player2.GetPosition())));
+		float gravityMultiplier = 20;
+		CVector2 directionVector = player2.GetPosition() - GetPosition();
+		directionVector = directionVector.Normalize();
+		F = F * gravityMultiplier;
+		directionVector = directionVector * F;
+		mVelocity = mVelocity + directionVector;
+	}
+	if (mPosition.GetDistance(player1.GetPosition()) < player1.GetGraphicsRadius() || mPosition.GetDistance(player2.GetPosition()) < player2.GetGraphicsRadius())
+	{
+		if (mPosition.GetDistance(player1.GetPosition()) < mPosition.GetDistance(player2.GetPosition()))
+			player2.IncrementScore();
+		else
+			player1.IncrementScore();
 
-			//possibly: applies gravitational force similarly to lorentz force (?)
-			//current: applies gravitational force directly
-
-			//mVelocity = mVelocity + (mPosition.GetDistance(player1.GetPosition()) * F) * -1;
-
-			//CVector2 size = GetVelocity();
-			//float F2 = size.Length() *sin(90);
-			//mVelocity = mVelocity + (mPosition.GetDistance(player1.GetPosition()) * F2 * G) * -1;
-
-			//float test = pi * 2;
-			//float F3 = test * test * (mPosition.GetDistance(player1.GetPosition()) / 24 * 24);
-
-			//float F4 = G * (player1.GetMass() / mPosition.GetDistance(player1.GetPosition()) * 2);
-			//mVelocity = mVelocity + CVector2(F3, F3);
-		}
-
-		//todo: search for orbit calculations
+		SetVelocity(CVector2(0, 0));
+		SetPosition(CVector2(windowWidth / 2, -100));
 	}
 
 	SetPosition(GetPosition() + (GetVelocity() * timeStep));
 
 	if (mPosition.GetX() < 0)
 	{
-		player2.Score();
-		SetVelocity(CVector2(0, mVelocity.GetY()));
+		player2.IncrementScore();
 	}
 	if (mPosition.GetX() > windowWidth)
 	{
-		player1.Score();
-		SetVelocity(CVector2(0, mVelocity.GetY()));
+		player1.IncrementScore();
 	}
 	if (mPosition.GetY() < 0)
 	{
@@ -62,6 +70,7 @@ void CBall::Update(float timeStep, CPlayer& player1, CPlayer& player2)
 	ballCanvas.y = mPosition.GetY() - (ballCanvas.h / 2);
 }
 
+//renders the graphic of this ball
 void CBall::Render(SDL_Renderer& renderer, SDL_Texture& ballImage) const
 {
 	SDL_RenderCopy(&renderer, &ballImage, NULL, &ballCanvas);

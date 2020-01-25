@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CBall">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEAKACAggAAAAAAAAAAAAAAkAAABgAAAQAAgA=</HashCode>
+      <FileName>CBall.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mPosition" />
+      <Field Name="mVelocity" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CPlayer">
+    <Position X="7.5" Y="0.5" Width="1.75" />
+    <AssociationLine Name="mPosition" Type="CVector2">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.146" Y="0.048" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AIQAAAAEEKAgwAggAAAAgACAAAEgEkgBABgAgiQBAgo=</HashCode>
+      <FileName>CPlayer.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mPosition" />
+      <Field Name="mVelocity" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CVector2">
+    <Position X="4" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQAAAABAAAAAAAYAEAAAAABAEAAAAAAAYABgAAAAAAA=</HashCode>
+      <FileName>CVector2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameManager">
+    <Position X="4" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>wBQAwAAABQAAAAAAAAAAAAAAIAAAAAAAIAAAAABQAAA=</HashCode>
+      <FileName>GameManager.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="player1" />
+      <Field Name="player2" />
+      <Field Name="ball" />
+    </ShowAsAssociation>
+  </Class>
+  <Enum Name="EGameState">
+    <Position X="0.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAggAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Defines.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

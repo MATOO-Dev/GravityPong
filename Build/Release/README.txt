@@ -1,0 +1,1 @@
+Dieses Projekt benötigt die SDL & SDL_Image Libraries
