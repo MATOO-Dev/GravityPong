@@ -1,37 +1,39 @@
 #include "CPlayer.h"
 
-CPlayer::CPlayer(char up, char down, char left, char right, CVector2 startPosition) :
+//constructor for CPlayer
+CPlayer::CPlayer(char up, char down, char left, char right, SDL_Scancode grav, CVector2 startPosition, int side) :
 	upKey(up),
 	downKey(down),
 	leftKey(left),
 	rightKey(right),
+	gravKey(grav),
 	mPosition(CVector2(0, 0)),
 	mVelocity(0, 0),
-	eventHorizonRadius(0),
-	gravityRadius(playerGravityRadius),
+	mScore(0),
+	gravityRadius(200),
 	graphicsRadius(10),
 	rotationRate(20),
+	boardSide(side),
 	mMass((4 * 10^6) * (2 * 10^30)),	//6*10^24
 	gravityCanvas({ 0, 0, (int)gravityRadius * 2, (int)gravityRadius * 2})
 {
 	for (int i = 0; i < 8; i++)
 	{
-		graphicsOffsets.push_back(CVector2(mPosition.GetX() - graphicsRadius, mPosition.GetY()));
-		graphicsOffsets[i].rotate(45 * i);
+		graphicsOffsets.push_back(CVector2(mPosition.GetX() - GetGraphicsRadius(), mPosition.GetY()));
+		graphicsOffsets[i].Rotate(45 * i);
 		graphicsOffsets[i].SetX(mPosition.GetX() + graphicsOffsets[i].GetX());
 		graphicsOffsets[i].SetY(mPosition.GetY() + graphicsOffsets[i].GetY());
 	}
 	SetPosition(startPosition);
 }
 
+//updates position and velocity of this and attached graphic, rotates circle
 void CPlayer::Update(float timeStep)
 {
 	SetPosition(GetPosition() + (GetVelocity() * timeStep));
 	SetVelocity(GetVelocity() * dragMultiplier);
 
 	const Uint8* keyInput = SDL_GetKeyboardState(NULL);
-
-
 
 	if (keyInput[SDL_GetScancodeFromKey(upKey)])
 	{
@@ -49,6 +51,14 @@ void CPlayer::Update(float timeStep)
 	{
 		AddVelocity(CVector2(moveSpeed, 0));
 	}
+	if (keyInput[SDL_Scancode(gravKey)])
+	{
+		mGravityActive = true;
+	}
+	else
+	{
+		mGravityActive = false;
+	}
 
 	//keeps Player in bounds(window)
 	if (mPosition.GetX() < 0)
@@ -56,11 +66,7 @@ void CPlayer::Update(float timeStep)
 		mPosition.SetX(0);
 		SetVelocity(CVector2(0, mVelocity.GetY()));
 	}
-	if (mPosition.GetX() > windowWidth)
-	{
-		mPosition.SetX(windowWidth);
-		SetVelocity(CVector2(0, mVelocity.GetY()));
-	}
+
 	if (mPosition.GetY() < 0)
 	{
 		mPosition.SetY(0);
@@ -72,15 +78,34 @@ void CPlayer::Update(float timeStep)
 		SetVelocity(CVector2(mVelocity.GetX(), 0));
 	}
 
+	if (boardSide == 0)
+	{
+		if (mPosition.GetX() > windowWidth / 2)
+		{
+			mPosition.SetX(windowWidth / 2);
+			SetVelocity(CVector2(0, mVelocity.GetY()));
+		}
+	}
+	else
+	{
+		if (mPosition.GetX() < windowWidth / 2)
+		{
+			mPosition.SetX(windowWidth / 2);
+			SetVelocity(CVector2(0, mVelocity.GetY()));
+		}
+	}
+	//rotate player graphic
 	for (int i = 0; i < graphicsOffsets.size(); i++)
 	{
-		graphicsOffsets[i].rotate(rotationRate);
+		graphicsOffsets[i].Rotate(rotationRate);
 	}
 
+	//set player gravity radius circle position
 	gravityCanvas.x = mPosition.GetX() - (gravityCanvas.w / 2);
 	gravityCanvas.y = mPosition.GetY() - (gravityCanvas.h / 2);
 }
 
+//renders star, displays attached graphic
 void CPlayer::Render(SDL_Renderer& renderer, SDL_Texture& gravityImage) const
 {
 	std::vector<CVector2> rotatedOffsets;

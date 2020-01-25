@@ -1,8 +1,8 @@
 #include "CBall.h"
-#include <iostream>
 
 #define G (6.674 * (10^1))	//gravitational constant, in reality 6.674 * (10^-11)
 
+//constructor for CBall
 CBall::CBall() :
 	mPosition(windowWidth / 2, windowHeight / 2),
 	mVelocity(0, 0),
@@ -11,65 +11,40 @@ CBall::CBall() :
 	ballCanvas({ 0, 0, (int)ballRadius * 2, (int)ballRadius * 2 })
 {}
 
+//updates mposition and velocity of this and attached graphic
 void CBall::Update(float timeStep, CPlayer& player1, CPlayer& player2)
 {
-	if (mPosition.GetDistance(player1.GetPosition()) < playerGravityRadius)
+	if (mPosition.GetDistance(player1.GetPosition()) < player1.GetGravityRadius() && player1.GetGravityState())
 	{
-
 		//calculates gravitational force based on Newtons gravitational law
 		float F = G * ((player1.GetMass() * GetMass()) / (mPosition.GetDistance(player1.GetPosition()) * mPosition.GetDistance(player1.GetPosition())));
-
-		//possibly: applies gravitational force similarly to lorentz force (?)
-		//current: applies gravitational force directly
-
-		//mVelocity = mVelocity + (mPosition.GetDistance(player1.GetPosition()) * F) * -1;
-
-		//CVector2 size = GetVelocity();
-		//float F2 = size.Length() *sin(90);
-		//mVelocity = mVelocity + (mPosition.GetDistance(player1.GetPosition()) * F2 * G) * -1;
-
-		//float test = pi * 2;
-		//float F3 = test * test * (mPosition.GetDistance(player1.GetPosition()) / 24 * 24);
-
-		//float F4 = G * (player1.GetMass() / mPosition.GetDistance(player1.GetPosition()) * 2);
-		//mVelocity = mVelocity + CVector2(F3, F3);
-
-	//todo: search for orbit calculations
 		float gravityMultiplier = 20;
 		CVector2 directionVector = player1.GetPosition() - GetPosition();
-		directionVector = directionVector.normalize();
+		directionVector = directionVector.Normalize();
 		F = F * gravityMultiplier;
 		directionVector = directionVector * F;
 		mVelocity = mVelocity + directionVector;
 	}
-	if (mPosition.GetDistance(player2.GetPosition()) < playerGravityRadius)
+	if (mPosition.GetDistance(player2.GetPosition()) < player2.GetGravityRadius() && player2.GetGravityState())
 	{
-
 		//calculates gravitational force based on Newtons gravitational law
 		float F = G * ((player2.GetMass() * GetMass()) / (mPosition.GetDistance(player2.GetPosition()) * mPosition.GetDistance(player2.GetPosition())));
-
-		//possibly: applies gravitational force similarly to lorentz force (?)
-		//current: applies gravitational force directly
-
-		//mVelocity = mVelocity + (mPosition.GetDistance(player1.GetPosition()) * F) * -1;
-
-		//CVector2 size = GetVelocity();
-		//float F2 = size.Length() *sin(90);
-		//mVelocity = mVelocity + (mPosition.GetDistance(player1.GetPosition()) * F2 * G) * -1;
-
-		//float test = pi * 2;
-		//float F3 = test * test * (mPosition.GetDistance(player1.GetPosition()) / 24 * 24);
-
-		//float F4 = G * (player1.GetMass() / mPosition.GetDistance(player1.GetPosition()) * 2);
-		//mVelocity = mVelocity + CVector2(F3, F3);
-
-	//todo: search for orbit calculations
 		float gravityMultiplier = 20;
 		CVector2 directionVector = player2.GetPosition() - GetPosition();
-		directionVector = directionVector.normalize();
+		directionVector = directionVector.Normalize();
 		F = F * gravityMultiplier;
 		directionVector = directionVector * F;
 		mVelocity = mVelocity + directionVector;
+	}
+	if (mPosition.GetDistance(player1.GetPosition()) < player1.GetGraphicsRadius() || mPosition.GetDistance(player2.GetPosition()) < player2.GetGraphicsRadius())
+	{
+		if (mPosition.GetDistance(player1.GetPosition()) < mPosition.GetDistance(player2.GetPosition()))
+			player2.IncrementScore();
+		else
+			player1.IncrementScore();
+
+		SetVelocity(CVector2(0, 0));
+		SetPosition(CVector2(windowWidth / 2, -100));
 	}
 
 	SetPosition(GetPosition() + (GetVelocity() * timeStep));
@@ -95,6 +70,7 @@ void CBall::Update(float timeStep, CPlayer& player1, CPlayer& player2)
 	ballCanvas.y = mPosition.GetY() - (ballCanvas.h / 2);
 }
 
+//renders the graphic of this ball
 void CBall::Render(SDL_Renderer& renderer, SDL_Texture& ballImage) const
 {
 	SDL_RenderCopy(&renderer, &ballImage, NULL, &ballCanvas);
